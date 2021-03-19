@@ -100,4 +100,19 @@ app.post("/deposit/", verifyIfExistsAccountCPF,(request, response) => {
      response.json(statement);
  });
 
+ app.put("/account",verifyIfExistsAccountCPF, (req, resp) => {
+    const {name} = req.body;
+    const { customer } = req;
+
+    customer.name = name;
+
+    return resp.status(201).send();
+ });
+
+ app.get("/account",verifyIfExistsAccountCPF, (req, resp) => {
+    const { customer } = req;
+
+    return resp.json(customer);
+ });
+
 app.listen(3333);
