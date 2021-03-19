@@ -115,4 +115,19 @@ app.post("/deposit/", verifyIfExistsAccountCPF,(request, response) => {
     return resp.json(customer);
  });
 
+ app.delete("/account",verifyIfExistsAccountCPF, (req, resp) => {
+    const { customer } = req;
+    customers.splice(customer,1);
+
+    return resp.status(200).json(customers);
+ });
+
+ app.get("/balance",verifyIfExistsAccountCPF, (req, resp) => {
+    const { customer } = req;
+    
+    const balance = getBalance(customer.statement);
+
+    return resp.status(200).json(balance);
+ });
+
 app.listen(3333);
